@@ -20,7 +20,7 @@ jobs:
         tags: v2.6.1-${{ github.run_number }}
         context: airflow
         containerfiles: |
-          ./Dockerfile
+          ./airflow/Dockerfile
 
     # Podman Login action (https://github.com/redhat-actions/podman-login) also be used to log in,
     # in which case 'username' and 'password' can be omitted.
