@@ -126,6 +126,7 @@ ARG ADDITIONAL_PYTHON_DEPS
 
 # - Create airflow user and install a minimal set of OS packages
 #   to run Apache Airflow
+# - Create AIRFLOW_HOME folder with required permission
 # - Note: RHEL9/UBI9 packages include PostgreSQL version 13
 RUN INSTALL_PKGS="python311 \
                   glibc-langpack-en \
@@ -137,7 +138,7 @@ RUN INSTALL_PKGS="python311 \
                   unixODBC \
                   postgresql" && \
     microdnf -y --setopt=tsflags=nodocs --setopt=install_weak_deps=0 install $INSTALL_PKGS && \
-    #useradd -u ${AIRFLOW_UID} -r -g ${AIRFLOW_GID} -d ${AIRFLOW_HOME} -s /sbin/nologin -c "Airflow User" airflow && \
+    mkdir -p ${AIRFLOW_HOME} && chmod g+rw ${AIRFLOW_HOME} && \
     microdnf -y clean all --enablerepo='*'
 
 
@@ -169,7 +170,7 @@ LABEL summary="$DESCRIPTION" \
 
 # - Copy installed Airflow and all it's dependencies from the build image
 # - Copy to /opt/ to keep the build image's AIRFLOW_HOME dir permission
-COPY --from=airflow-build-image "${AIRFLOW_HOME}" /opt/
+COPY --from=airflow-build-image "${AIRFLOW_HOME}" "${AIRFLOW_HOME}"
 
 EXPOSE 8080
 
