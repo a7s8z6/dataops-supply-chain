@@ -167,8 +167,9 @@ LABEL summary="$DESCRIPTION" \
       name="airflow" \
       version="1"
 
-# Copy installed Airflow and all it's dependencies from the build image
-COPY --from=airflow-build-image "${AIRFLOW_HOME}" "${AIRFLOW_HOME}"
+# - Copy installed Airflow and all it's dependencies from the build image
+# - Copy to /opt/ to keep the build image's AIRFLOW_HOME dir permission
+COPY --from=airflow-build-image "${AIRFLOW_HOME}" /opt/
 
 EXPOSE 8080
 
