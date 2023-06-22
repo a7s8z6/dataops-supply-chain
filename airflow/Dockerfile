@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ARG BASE_IMAGE="registry.access.redhat.com/ubi9/ubi-minimal:9.2-484"
+ARG BASE_IMAGE="registry.access.redhat.com/ubi9/ubi-minimal:9.2-691"
 
 ARG AIRFLOW_UID="1001"
 ARG AIRFLOW_GID="0"
