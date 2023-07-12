@@ -17,7 +17,7 @@ jobs:
       uses: redhat-actions/buildah-build@v2
       with:
         image: airflow
-        tags: v2.6.2-${{ github.run_number }}
+        tags: v2.6.3-${{ github.run_number }}
         context: airflow
         containerfiles: |
           ./airflow/Dockerfile
